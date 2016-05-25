@@ -1,0 +1,53 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="titulo">Novo usuário</ui:define>
+	
+	<ui:define name="corpo">
+		<h:form>
+			<h1>Novo usuário</h1>
+			
+			<p:toolbar style="margin-top: 20px">
+				<p:toolbarGroup>
+					<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
+					<p:commandButton id="botaoSalvar" value="Salvar" />
+				</p:toolbarGroup>
+				<p:toolbarGroup align="right">
+					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios" />
+				</p:toolbarGroup>
+			</p:toolbar>
+			
+			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
+				<p:outputLabel value="Nome" for="nome" />
+				<p:inputText id="nome" size="60" maxlength="80" />
+				
+				<p:outputLabel value="E-mail" for="email" />
+				<p:inputText id="email" size="60" maxlength="40" />
+				
+				<p:outputLabel value="Senha" for="senha" />
+				<p:password id="senha" size="30" maxlength="20" />
+				
+				<p:selectOneMenu id="grupos">
+					<f:selectItem itemLabel="Selecione" />
+					<f:selectItem itemLabel="Administradores" />
+					<f:selectItem itemLabel="Usuário" />
+				</p:selectOneMenu>
+				<p:commandButton id="botaoAdicionarGrupo" value="Adicionar grupo" style="font-size: 10px" />
+			</p:panelGrid>
+			
+			<p:dataTable id="tabelaGrupos" value="#{cadastroUsuarioBean.grupos}" var="grupo" 
+				style="margin-top: 20px" emptyMessage="Nenhum grupo cadastrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
+				
+				<p:column headerText="Grupo">
+					<h:outputText value="Auxiliares" />
+				</p:column>
+				<p:column style="text-align: center; width: 50px">
+					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+				</p:column>
+			</p:dataTable>
+		</h:form>
+	</ui:define>
+</ui:composition>

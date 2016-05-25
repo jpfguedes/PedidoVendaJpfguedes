@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Login</title>
+		
+		<link href='https://fonts.googleapis.com/css?family=Alegreya+Sans:500,300,300italic,400,700,900,800' rel='stylesheet' type='text/css' />
+        <h:outputStylesheet library="css" name="sistema.css"/>
+    </h:head>
+    
+    <h:body>
+    	<div id="login-dialog">
+    		<h1>Login</h1>
+    		
+    		<h:form id="frm">
+    			<h:panelGrid columns="2" styleClass="grid-login">
+    				<p:outputLabel value="E-mail" />
+    				<p:inputText size="30" />
+    				
+    				<p:outputLabel value="Senha" />
+    				<p:password size="30" />
+    				
+    				<h:panelGroup />
+    				<p:commandButton value="Login" />
+    			</h:panelGrid>
+    		</h:form>
+    	</div>
+    	
+    	<p:separator />
+    	
+    	<div id="footer-login">
+    		Developed by João Paulo F. Guedes.<br/>
+    		<a href="https://goo.gl/DBzUtd" target="_blank">
+    			<h:graphicImage library="images" name="in_dark.png" />
+    		</a>
+    		<a href="https://goo.gl/jQvV12" target="_blank">
+    			<h:graphicImage library="images" name="facebook_dark.png" />
+    		</a>
+    		<a href="https://goo.gl/JCYh24" target="_blank">
+    			<h:graphicImage library="images" name="twitter_dark.png" />
+    		</a>
+    		<a href="https://goo.gl/uOfJwE" target="_blank">
+    			<h:graphicImage library="images" name="youtube_dark.png" />
+    		</a>
+    	</div>
+    </h:body>
+    
+</html>
