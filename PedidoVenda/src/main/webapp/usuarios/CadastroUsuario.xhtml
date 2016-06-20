@@ -45,9 +45,16 @@
 					<h:outputText value="Auxiliares" />
 				</p:column>
 				<p:column style="text-align: center; width: 50px">
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir" update="tabelaGrupos">
+						<p:confirm header="Exclusão de grupo" message="Tem certeza de que deseja excluir este grupo?" icon="ui-icon-alert" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

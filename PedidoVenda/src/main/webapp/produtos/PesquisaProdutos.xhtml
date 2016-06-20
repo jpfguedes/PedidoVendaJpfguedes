@@ -48,9 +48,16 @@
 				</p:column>
 				<p:column style="width: 100px; text-align: center">
 					<p:button icon="ui-icon-pencil" title="Editar" />
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir">
+						<p:confirm header="Exclusão de produto" message="Tem certeza que deseja excluir o porduto?" icon="ui-icon-alert" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+			
+			<p:confirmDialog global="true" showEffect="folder" hideEffect="folder">
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>

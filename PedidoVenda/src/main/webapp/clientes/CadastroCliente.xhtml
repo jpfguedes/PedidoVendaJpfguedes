@@ -36,9 +36,39 @@
 				<p:outputLabel value="E-mail" for="email" />
 				<p:inputText id="email" size="40" maxlength="60" />
 				
-				<p:commandButton id="botaoAddEndereco" value="Adicionar endereço" style="font-size: 10px" />
+				<p:button id="botaoAddEndereco" value="Adicionar endereço" style="font-size: 10px" onclick="PF('addEnderecoDialog').show(); return false;" />
 				<p:spacer />
 			</p:panelGrid>
+			
+			<p:dialog header="Inclusão de endereço" widgetVar="addEnderecoDialog" modal="true">
+				<h:panelGroup id="inclusaoEnderecoPanel">
+					<p:messages autoUpdate="true" closable="true" />
+					
+					<p:panelGrid columns="2">
+						<p:outputLabel value="Logradouro" for="logradouroDialog" />
+						<p:inputText id="logradouroDialog" size="60" />
+						
+						<p:outputLabel value="Número" for="numeroDialog" />
+						<p:inputText id="numeroDialog" size="15" />
+						
+						<p:outputLabel value="Complemento" for="complementoDialog" />
+						<p:inputText id="complementoDialog" size="40" />
+						
+						<p:outputLabel value="CEP" for="cepDialog" />
+						<p:inputText id="cepDialog" size="20" />
+						
+						<p:outputLabel value="Cidade" for="cidadeDialog" />
+						<p:panelGrid columns="3">
+							<p:inputText id="cidadeDialog" size="40" />
+							<p:outputLabel value="UF" for="ufDialog" />
+							<p:inputText id="ufDialog" size="8" />
+						</p:panelGrid>
+						
+						<p:spacer />
+						<p:commandButton id="botaoIncluirEnderecoDialog" value="Incluir" />
+					</p:panelGrid>
+				</h:panelGroup>
+			</p:dialog>
 			
 			<p:dataTable id="tabelaEnderecos" value="#{cadastroClienteBean.enderecos}" var="endereco"
 				style="margin-top: 20px" emptyMessage="Nenhum endereço encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
@@ -60,9 +90,16 @@
 				</p:column>
 				<p:column style="width: 100px; text-align: center">
 					<p:button icon="ui-icon-pencil" title="Editar" />
-					<p:commandButton icon="ui-icon-trash" title="Excluir" />
+					<p:commandButton icon="ui-icon-trash" title="Excluir" update="tabelaEnderecos">
+						<p:confirm header="Exclusão de endereço" message="Tem certeza que deseja excluir o endereço?" icon="ui-icon-alert" />
+					</p:commandButton>
 				</p:column>
 			</p:dataTable>
+			
+			<p:confirmDialog global="true" showEffect="folder" hideEffect="folder">
+				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 		</h:form>
 	</ui:define>
 </ui:composition>
