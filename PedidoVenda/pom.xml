@@ -34,6 +34,13 @@
 			<scope>compile</scope>
 		</dependency>
 		
+		<dependency>
+		   <groupId>javax.enterprise</groupId>
+		   <artifactId>cdi-api</artifactId>
+		   <version>1.2</version>
+		   <scope>provided</scope>
+		</dependency>
+		
 	</dependencies>
 	
 	<!-- Repositório do primefaces (para baixar os temas) -->
