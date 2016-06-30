@@ -26,12 +26,20 @@
 			<version>1.0.10</version>
 		</dependency>
 		
-		<!-- Mojarra (implementação do JSF -->
+		<!-- Mojarra (implementação do JSF) -->
 		<dependency>
 			<groupId>org.glassfish</groupId>
 			<artifactId>javax.faces</artifactId>
 			<version>2.2.13</version>
 			<scope>compile</scope>
+		</dependency>
+		
+		<!-- CDI-Weld implementação -->
+		<dependency>
+		    <groupId>org.jboss.weld.servlet</groupId>
+		    <artifactId>weld-servlet</artifactId>
+		    <version>2.3.4.Final</version>
+		    <scope>compile</scope>
 		</dependency>
 		
 		<dependency>
@@ -41,6 +49,25 @@
 		   <scope>provided</scope>
 		</dependency>
 		
+		<!-- Log4J -->
+	    <dependency>
+	      <groupId>org.apache.logging.log4j</groupId>
+	      <artifactId>log4j-api</artifactId>
+	      <version>2.6.1</version>
+	    </dependency>
+	    
+	    <dependency>
+	      <groupId>org.apache.logging.log4j</groupId>
+	      <artifactId>log4j-core</artifactId>
+	      <version>2.6.1</version>
+	    </dependency>
+	    
+	    <!-- Commons Logging -->
+	    <dependency>
+		    <groupId>commons-logging</groupId>
+		    <artifactId>commons-logging</artifactId>
+		    <version>1.2</version>
+		</dependency>
 	</dependencies>
 	
 	<!-- Repositório do primefaces (para baixar os temas) -->
