@@ -4,8 +4,6 @@
 package com.jpfguedes.pedidovenda.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author joao.guedes
@@ -19,7 +17,6 @@ public class Grupo implements Serializable {
 	private Long id;
 	private String nome;
 	private String descricao;
-	private List<Grupo> grupos = new ArrayList<>();
 
 	/**
 	 * @return the id
@@ -64,21 +61,6 @@ public class Grupo implements Serializable {
 	 */
 	public void setDescricao(String descricao) {
 		this.descricao = descricao;
-	}
-
-	/**
-	 * @return the grupos
-	 */
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	/**
-	 * @param grupos
-	 *            the grupos to set
-	 */
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
 	}
 
 	/*

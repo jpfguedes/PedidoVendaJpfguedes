@@ -12,15 +12,14 @@ import java.util.List;
  *
  */
 
-public class Usuario implements Serializable {
+public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
-	private String nome;
-	private String email;
-	private String senha;
-	private List<Grupo> grupos = new ArrayList<>();
+	private String descricao;
+	private Categoria categoriaPai;
+	private List<Categoria> subcategorias = new ArrayList<>();
 
 	/**
 	 * @return the id
@@ -38,63 +37,48 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * @return the nome
+	 * @return the descricao
 	 */
-	public String getNome() {
-		return nome;
+	public String getDescricao() {
+		return descricao;
 	}
 
 	/**
-	 * @param nome
-	 *            the nome to set
+	 * @param descricao
+	 *            the descricao to set
 	 */
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
 	}
 
 	/**
-	 * @return the email
+	 * @return the categoriaPai
 	 */
-	public String getEmail() {
-		return email;
+	public Categoria getCategoriaPai() {
+		return categoriaPai;
 	}
 
 	/**
-	 * @param email
-	 *            the email to set
+	 * @param categoriaPai
+	 *            the categoriaPai to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setCategoriaPai(Categoria categoriaPai) {
+		this.categoriaPai = categoriaPai;
 	}
 
 	/**
-	 * @return the senha
+	 * @return the subcategorias
 	 */
-	public String getSenha() {
-		return senha;
+	public List<Categoria> getSubcategorias() {
+		return subcategorias;
 	}
 
 	/**
-	 * @param senha
-	 *            the senha to set
+	 * @param subcategorias
+	 *            the subcategorias to set
 	 */
-	public void setSenha(String senha) {
-		this.senha = senha;
-	}
-
-	/**
-	 * @return the grupos
-	 */
-	public List<Grupo> getGrupos() {
-		return grupos;
-	}
-
-	/**
-	 * @param grupos
-	 *            the grupos to set
-	 */
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
+	public void setSubcategorias(List<Categoria> subcategorias) {
+		this.subcategorias = subcategorias;
 	}
 
 	/*
@@ -121,9 +105,9 @@ public class Usuario implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Usuario))
+		if (!(obj instanceof Categoria))
 			return false;
-		Usuario other = (Usuario) obj;
+		Categoria other = (Categoria) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;

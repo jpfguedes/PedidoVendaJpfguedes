@@ -4,23 +4,23 @@
 package com.jpfguedes.pedidovenda.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
+import java.math.BigDecimal;
 
 /**
  * @author joao.guedes
  *
  */
 
-public class Usuario implements Serializable {
+public class Produto implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	private Long id;
 	private String nome;
-	private String email;
-	private String senha;
-	private List<Grupo> grupos = new ArrayList<>();
+	private String sku;
+	private BigDecimal valorUnitario;
+	private Integer quantidadeEstoque;
+	private Categoria categoria;
 
 	/**
 	 * @return the id
@@ -53,48 +53,63 @@ public class Usuario implements Serializable {
 	}
 
 	/**
-	 * @return the email
+	 * @return the sku
 	 */
-	public String getEmail() {
-		return email;
+	public String getSku() {
+		return sku;
 	}
 
 	/**
-	 * @param email
-	 *            the email to set
+	 * @param sku
+	 *            the sku to set
 	 */
-	public void setEmail(String email) {
-		this.email = email;
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 
 	/**
-	 * @return the senha
+	 * @return the valorUnitario
 	 */
-	public String getSenha() {
-		return senha;
+	public BigDecimal getValorUnitario() {
+		return valorUnitario;
 	}
 
 	/**
-	 * @param senha
-	 *            the senha to set
+	 * @param valorUnitario
+	 *            the valorUnitario to set
 	 */
-	public void setSenha(String senha) {
-		this.senha = senha;
+	public void setValorUnitario(BigDecimal valorUnitario) {
+		this.valorUnitario = valorUnitario;
 	}
 
 	/**
-	 * @return the grupos
+	 * @return the quantidadeEstoque
 	 */
-	public List<Grupo> getGrupos() {
-		return grupos;
+	public Integer getQuantidadeEstoque() {
+		return quantidadeEstoque;
 	}
 
 	/**
-	 * @param grupos
-	 *            the grupos to set
+	 * @param quantidadeEstoque
+	 *            the quantidadeEstoque to set
 	 */
-	public void setGrupos(List<Grupo> grupos) {
-		this.grupos = grupos;
+	public void setQuantidadeEstoque(Integer quantidadeEstoque) {
+		this.quantidadeEstoque = quantidadeEstoque;
+	}
+
+	/**
+	 * @return the categoria
+	 */
+	public Categoria getCategoria() {
+		return categoria;
+	}
+
+	/**
+	 * @param categoria
+	 *            the categoria to set
+	 */
+	public void setCategoria(Categoria categoria) {
+		this.categoria = categoria;
 	}
 
 	/*
@@ -121,9 +136,9 @@ public class Usuario implements Serializable {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof Usuario))
+		if (!(obj instanceof Produto))
 			return false;
-		Usuario other = (Usuario) obj;
+		Produto other = (Produto) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
