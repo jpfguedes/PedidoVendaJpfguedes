@@ -5,11 +5,17 @@ package com.jpfguedes.pedidovenda.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+
 /**
  * @author joao.guedes
  *
  */
 
+@Entity
 public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -26,6 +32,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the id
 	 */
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -131,6 +139,7 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the cliente
 	 */
+	@ManyToOne
 	public Cliente getCliente() {
 		return cliente;
 	}
