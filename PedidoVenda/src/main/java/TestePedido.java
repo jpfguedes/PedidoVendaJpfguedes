@@ -7,9 +7,21 @@ import com.jpfguedes.pedidovenda.model.Cliente;
 import com.jpfguedes.pedidovenda.model.Endereco;
 import com.jpfguedes.pedidovenda.model.TipoPessoa;
 
-public class Teste {
-	
+/**
+ * 
+ */
+
+/**
+ * @author joao.guedes
+ *
+ */
+public class TestePedido {
+
+	/**
+	 * @param args
+	 */
 	public static void main(String[] args) {
+		
 		EntityManagerFactory factory = Persistence.createEntityManagerFactory("PedidoPU");
 		EntityManager manager = factory.createEntityManager();
 		
@@ -17,8 +29,8 @@ public class Teste {
 		trx.begin();
 		
 		Cliente cliente = new Cliente();
-		cliente.setNome("Joao das Couves");
-		cliente.setEmail("joao.couves@pedidovenda.com");
+		cliente.setNome("João das Couves");
+		cliente.setEmail("joao@dascouves.com");
 		cliente.setDocumentoReceitaFederal("123.123.123-12");
 		cliente.setTipo(TipoPessoa.FISICA);
 		
@@ -35,6 +47,7 @@ public class Teste {
 		manager.persist(cliente);
 		
 		trx.commit();
+		
 	}
-	
+
 }

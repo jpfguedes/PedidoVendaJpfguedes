@@ -6,11 +6,21 @@ package com.jpfguedes.pedidovenda.model;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
 /**
  * @author joao.guedes
  *
  */
 
+@Entity
+@Table(name = "item_pedido")
 public class ItemPedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -24,6 +34,9 @@ public class ItemPedido implements Serializable {
 	/**
 	 * @return the id
 	 */
+	
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +52,8 @@ public class ItemPedido implements Serializable {
 	/**
 	 * @return the quantidade
 	 */
+	
+	@Column(nullable = false, length = 3)
 	public Integer getQuantidade() {
 		return quantidade;
 	}
@@ -54,6 +69,8 @@ public class ItemPedido implements Serializable {
 	/**
 	 * @return the valorUnitario
 	 */
+	
+	@Column(name = "valor_unitario", nullable = false, precision = 10, scale = 2)
 	public BigDecimal getValorUnitario() {
 		return valorUnitario;
 	}
@@ -69,6 +86,9 @@ public class ItemPedido implements Serializable {
 	/**
 	 * @return the produto
 	 */
+	
+	@ManyToOne
+	@JoinColumn(name = "produto_id", nullable = false)
 	public Produto getProduto() {
 		return produto;
 	}
@@ -84,6 +104,9 @@ public class ItemPedido implements Serializable {
 	/**
 	 * @return the pedido
 	 */
+	
+	@ManyToOne
+	@JoinColumn(name = "pedido_id", nullable = false)
 	public Pedido getPedido() {
 		return pedido;
 	}

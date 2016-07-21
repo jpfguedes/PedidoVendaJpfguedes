@@ -5,10 +5,13 @@ package com.jpfguedes.pedidovenda.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 /**
  * @author joao.guedes
@@ -16,6 +19,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
+@Table(name = "endereco")
 public class Endereco implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -49,6 +53,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the logradouro
 	 */
+	
+	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -64,6 +70,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the numero
 	 */
+	
+	@Column(nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
 	}
@@ -79,6 +87,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the complemento
 	 */
+	
+	@Column(length = 150)
 	public String getComplemento() {
 		return complemento;
 	}
@@ -94,6 +104,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the cidade
 	 */
+	
+	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
 	}
@@ -109,6 +121,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the uf
 	 */
+	
+	@Column(nullable = false, length = 60)
 	public String getUf() {
 		return uf;
 	}
@@ -124,6 +138,8 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the cep
 	 */
+	
+	@Column(nullable = false, length = 9)
 	public String getCep() {
 		return cep;
 	}
@@ -139,7 +155,9 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the cliente
 	 */
+	
 	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false)
 	public Cliente getCliente() {
 		return cliente;
 	}

@@ -9,5 +9,7 @@ package com.jpfguedes.pedidovenda.model;
  */
 
 public enum StatusPedido {
+	
 	ORCAMENTO, EMITIDO, CANCELADO
+	
 }

@@ -9,11 +9,29 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
+
 /**
  * @author joao.guedes
  *
  */
 
+@Entity
+@Table(name = "pedido")
 public class Pedido implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -35,6 +53,9 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the id
 	 */
+	
+	@Id
+	@GeneratedValue
 	public Long getId() {
 		return id;
 	}
@@ -50,6 +71,10 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the dataCriacao
 	 */
+	
+	@NotNull
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name = "data_criacao", nullable = false)
 	public Date getDataCriacao() {
 		return dataCriacao;
 	}
@@ -65,6 +90,8 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the observacao
 	 */
+	
+	@Column(columnDefinition = "text")
 	public String getObservacao() {
 		return observacao;
 	}
@@ -80,6 +107,10 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the dataEntrega
 	 */
+	
+	@NotNull
+	@Temporal(TemporalType.DATE)
+	@Column(name = "data_entrega", nullable = false)
 	public Date getDataEntrega() {
 		return dataEntrega;
 	}
@@ -95,6 +126,9 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the valorFrete
 	 */
+	
+	@NotNull
+	@Column(name = "valor_frete", nullable = false, precision = 10, scale = 2)
 	public BigDecimal getValorFrete() {
 		return valorFrete;
 	}
@@ -110,6 +144,9 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the valorDesconto
 	 */
+	
+	@NotNull
+	@Column(name = "valor_desconto", nullable = false, precision = 10, scale = 2)
 	public BigDecimal getValorDesconto() {
 		return valorDesconto;
 	}
@@ -125,6 +162,9 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the valorTotal
 	 */
+	
+	@NotNull
+	@Column(name = "valor_total", nullable = false, precision = 10, scale = 2)
 	public BigDecimal getValorTotal() {
 		return valorTotal;
 	}
@@ -140,6 +180,10 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the status
 	 */
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(nullable = false, length = 20)
 	public StatusPedido getStatus() {
 		return status;
 	}
@@ -155,6 +199,10 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the formaPagamento
 	 */
+	
+	@NotNull
+	@Enumerated(EnumType.STRING)
+	@Column(name = "forma_pagamento", nullable = false, length = 20)
 	public FormaPagamento getFormaPagamento() {
 		return formaPagamento;
 	}
@@ -170,6 +218,10 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the vendedor
 	 */
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "vendedor_id", nullable = false)
 	public Usuario getVendedor() {
 		return vendedor;
 	}
@@ -185,6 +237,10 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the cliente
 	 */
+	
+	@NotNull
+	@ManyToOne
+	@JoinColumn(name = "cliente_id", nullable = false)
 	public Cliente getCliente() {
 		return cliente;
 	}
@@ -200,6 +256,8 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the enderecoEntrega
 	 */
+	
+	@Embedded
 	public EnderecoEntrega getEnderecoEntrega() {
 		return enderecoEntrega;
 	}
@@ -215,6 +273,8 @@ public class Pedido implements Serializable {
 	/**
 	 * @return the itens
 	 */
+	
+	@OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<ItemPedido> getItens() {
 		return itens;
 	}

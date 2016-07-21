@@ -5,11 +5,18 @@ package com.jpfguedes.pedidovenda.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
+
 /**
  * @author joao.guedes
  *
  */
 
+@Embeddable
 public class EnderecoEntrega implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -25,6 +32,9 @@ public class EnderecoEntrega implements Serializable {
 	/**
 	 * @return the logradouro
 	 */
+	
+	@NotBlank @Size(max = 150)
+	@Column(name = "entrega_logradouro", nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
 	}
@@ -40,6 +50,9 @@ public class EnderecoEntrega implements Serializable {
 	/**
 	 * @return the numero
 	 */
+	
+	@NotBlank @Size(max = 20)
+	@Column(name = "entrega_numero", nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
 	}
@@ -55,6 +68,9 @@ public class EnderecoEntrega implements Serializable {
 	/**
 	 * @return the complemento
 	 */
+	
+	@Size(max = 150)
+	@Column(name = "entrega_complemento", length = 150)
 	public String getComplemento() {
 		return complemento;
 	}
@@ -70,6 +86,9 @@ public class EnderecoEntrega implements Serializable {
 	/**
 	 * @return the cidade
 	 */
+	
+	@NotBlank @Size(max = 60)
+	@Column(name = "entrega_cidade", nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
 	}
@@ -85,6 +104,9 @@ public class EnderecoEntrega implements Serializable {
 	/**
 	 * @return the uf
 	 */
+	
+	@NotBlank @Size(max = 60)
+	@Column(name = "entrega_uf", nullable = false, length = 60)
 	public String getUf() {
 		return uf;
 	}
@@ -100,6 +122,9 @@ public class EnderecoEntrega implements Serializable {
 	/**
 	 * @return the cep
 	 */
+	
+	@NotBlank @Size(max = 9)
+	@Column(name = "entrega_cep", nullable = false, length = 9)
 	public String getCep() {
 		return cep;
 	}

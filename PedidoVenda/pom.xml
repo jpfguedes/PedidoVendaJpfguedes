@@ -28,6 +28,14 @@
 			<version>5.2.1.Final</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- Hibernate validator (Implementação do Bean Validation) -->
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-validator</artifactId>
+		    <version>5.2.4.Final</version>
+		    <scope>compile</scope>
+		</dependency>
 
 		<!-- Driver JDBC do MySQL -->
 		<dependency>
