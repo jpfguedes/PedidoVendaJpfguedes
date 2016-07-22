@@ -10,6 +10,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @author joao.guedes
@@ -48,6 +51,7 @@ public class Grupo implements Serializable {
 	 * @return the nome
 	 */
 	
+	@NotBlank @Size(max = 40)
 	@Column(nullable = false, length = 40)
 	public String getNome() {
 		return nome;
@@ -65,6 +69,7 @@ public class Grupo implements Serializable {
 	 * @return the descricao
 	 */
 	
+	@NotBlank @Size(max = 80)
 	@Column(nullable = false, length = 80)
 	public String getDescricao() {
 		return descricao;

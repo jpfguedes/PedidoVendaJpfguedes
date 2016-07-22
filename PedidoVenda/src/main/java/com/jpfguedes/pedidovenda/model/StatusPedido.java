@@ -10,6 +10,10 @@ package com.jpfguedes.pedidovenda.model;
 
 public enum StatusPedido {
 	
-	ORCAMENTO, EMITIDO, CANCELADO
+	ORCAMENTO, EMITIDO, CANCELADO;
 	
+	
+	public StatusPedido[] getStatusPedidos() {
+		return StatusPedido.values();
+	}
 }

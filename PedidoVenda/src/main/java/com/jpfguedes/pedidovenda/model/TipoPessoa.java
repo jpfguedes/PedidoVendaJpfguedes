@@ -10,6 +10,10 @@ package com.jpfguedes.pedidovenda.model;
 
 public enum TipoPessoa {
 	
-	FISICA, JURIDICA
+	FISICA, JURIDICA;
+	
+	public TipoPessoa[] getTiposPessoa() {
+		return TipoPessoa.values();
+	}
 	
 }

@@ -20,6 +20,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.jpfguedes.pedidovenda.validation.SKU;
+
 /**
  * @author joao.guedes
  *
@@ -79,7 +81,7 @@ public class Produto implements Serializable {
 	 * @return the sku
 	 */
 	
-	@NotBlank
+	@NotBlank @SKU
 	@Column(nullable = false, unique = true, length = 20)
 	public String getSku() {
 		return sku;
@@ -115,7 +117,8 @@ public class Produto implements Serializable {
 	 * @return the quantidadeEstoque
 	 */
 	
-	@NotNull @Min(0) @Max(9999)
+	@NotNull(message = "é obrigatório")
+	@Min(0) @Max(value = 9999, message = "tem um valor muito alto")
 	@Column(name = "quantidade_estoque", nullable = false, length = 5)
 	public Integer getQuantidadeEstoque() {
 		return quantidadeEstoque;

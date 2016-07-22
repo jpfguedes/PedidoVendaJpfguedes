@@ -12,6 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @author joao.guedes
@@ -54,6 +58,7 @@ public class Endereco implements Serializable {
 	 * @return the logradouro
 	 */
 	
+	@NotBlank @Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
@@ -71,6 +76,7 @@ public class Endereco implements Serializable {
 	 * @return the numero
 	 */
 	
+	@NotBlank @Size(max = 20)
 	@Column(nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
@@ -88,6 +94,7 @@ public class Endereco implements Serializable {
 	 * @return the complemento
 	 */
 	
+	@Size(max = 150)
 	@Column(length = 150)
 	public String getComplemento() {
 		return complemento;
@@ -105,6 +112,7 @@ public class Endereco implements Serializable {
 	 * @return the cidade
 	 */
 	
+	@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -122,6 +130,7 @@ public class Endereco implements Serializable {
 	 * @return the uf
 	 */
 	
+	@NotBlank @Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getUf() {
 		return uf;
@@ -139,6 +148,7 @@ public class Endereco implements Serializable {
 	 * @return the cep
 	 */
 	
+	@NotBlank @Size(max = 9)
 	@Column(nullable = false, length = 9)
 	public String getCep() {
 		return cep;
@@ -156,6 +166,7 @@ public class Endereco implements Serializable {
 	 * @return the cliente
 	 */
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	public Cliente getCliente() {
