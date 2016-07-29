@@ -9,6 +9,7 @@ import javax.inject.Inject;
 
 import com.jpfguedes.pedidovenda.model.Produto;
 import com.jpfguedes.pedidovenda.repository.Produtos;
+import com.jpfguedes.pedidovenda.util.jpa.Transactional;
 
 /**
  * @author joao.guedes
@@ -22,6 +23,7 @@ public class CadastroProdutoService implements Serializable {
 	@Inject
 	private Produtos produtos;
 	
+	@Transactional
 	public Produto salvar(Produto produto) {
 		Produto produtoExistente = produtos.porSku(produto.getSku());
 		
