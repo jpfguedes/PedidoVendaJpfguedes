@@ -10,6 +10,7 @@ import javax.inject.Named;
 import com.jpfguedes.pedidovenda.model.Produto;
 import com.jpfguedes.pedidovenda.repository.Produtos;
 import com.jpfguedes.pedidovenda.repository.filter.ProdutoFilter;
+import com.jpfguedes.pedidovenda.util.jsf.FacesUtil;
 
 /**
  * @author joao.guedes
@@ -26,15 +27,24 @@ public class PesquisaProdutosBean implements Serializable {
 
 	private ProdutoFilter filtro;
 	private List<Produto> produtosFiltrados;
-	
+
+	private Produto produtoSelecionado;
+
 	public PesquisaProdutosBean() {
 		filtro = new ProdutoFilter();
 	}
 	
+	public void excluir() {
+		produtos.remover(produtoSelecionado);
+		produtosFiltrados.remove(produtoSelecionado);
+		
+		FacesUtil.addInfoMessage("Produto " + produtoSelecionado.getSku() + " excluído com sucesso.");
+	}
+
 	public void pesquisar() {
 		produtosFiltrados = produtos.filtrados(filtro);
 	}
-	
+
 	public List<Produto> getProdutosFiltrados() {
 		return produtosFiltrados;
 	}
@@ -44,6 +54,21 @@ public class PesquisaProdutosBean implements Serializable {
 	 */
 	public ProdutoFilter getFiltro() {
 		return filtro;
+	}
+
+	/**
+	 * @return the produtoSelecionado
+	 */
+	public Produto getProdutoSelecionado() {
+		return produtoSelecionado;
+	}
+
+	/**
+	 * @param produtoSelecionado
+	 *            the produtoSelecionado to set
+	 */
+	public void setProdutoSelecionado(Produto produtoSelecionado) {
+		this.produtoSelecionado = produtoSelecionado;
 	}
 
 }

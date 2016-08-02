@@ -8,7 +8,7 @@
     <ui:define name="titulo">Pesquisa produtos</ui:define>
 	
 	<ui:define name="corpo">
-		<h:form>
+		<h:form id="frmPesquisa">
 			<h1>Pesquisa de produtos</h1>
 			
 			<p:messages autoUpdate="true" closable="true" />
@@ -52,14 +52,20 @@
 					<h:outputText value="#{produto.quantidadeEstoque}" />
 				</p:column>
 				<p:column style="width: 100px; text-align: center">
-					<p:button icon="ui-icon-pencil" title="Editar" />
-					<p:commandButton icon="ui-icon-trash" title="Excluir">
-						<p:confirm header="Exclusão de produto" message="Tem certeza que deseja excluir o porduto?" icon="ui-icon-alert" />
+					<p:button icon="ui-icon-pencil" title="Editar" outcome="/produtos/CadastroProduto">
+						<f:param name="produto" value="#{produto.id}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{pesquisaProdutosBean.excluir}" process="@this" 
+									 update=":frmPesquisa:confirmacaoExclusaoDialog :frmPesquisa:produtosTable">
+									 
+						<f:setPropertyActionListener value="#{produto}" target="#{pesquisaProdutosBean.produtoSelecionado}" />			 
+						<p:confirm header="Exclusão de produto" message="Tem certeza que deseja excluir o produto #{pesquisaProdutosBean.produtoSelecionado.sku}?" icon="ui-icon-alert" />
+						
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 			
-			<p:confirmDialog global="true" showEffect="folder" hideEffect="folder">
+			<p:confirmDialog id="confirmacaoExclusaoDialog" global="true" showEffect="fade" hideEffect="fade">
 				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>

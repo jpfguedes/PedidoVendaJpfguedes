@@ -67,6 +67,14 @@
 			<version>2.2.13</version>
 			<scope>compile</scope>
 		</dependency>
+		
+		<!-- OmniFaces (utilitários para JSF) -->
+		<dependency>
+		    <groupId>org.omnifaces</groupId>
+		    <artifactId>omnifaces</artifactId>
+		    <version>2.4</version>
+		    <scope>compile</scope>
+		</dependency>
 
 		<!-- CDI-Weld implementação -->
 		<dependency>
@@ -75,7 +83,8 @@
 			<version>2.3.4.Final</version>
 			<scope>compile</scope>
 		</dependency>
-
+	
+		<!-- Jandex (Weld depende do Jandex) -->
 		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
