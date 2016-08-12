@@ -60,7 +60,7 @@ public class Produtos implements Serializable {
 		}
 	}
 	
-	//TODO Mudar para API @javax.persistence.criteria.CriteriaQuery.
+	// OBS.: Mudar para API @javax.persistence.criteria.CriteriaQuery se usar uma versão mais nova do Hibernate.
 	@SuppressWarnings({ "unchecked" })
 	public List<Produto> filtrados(ProdutoFilter filtro) {
 		Session session = manager.unwrap(Session.class);

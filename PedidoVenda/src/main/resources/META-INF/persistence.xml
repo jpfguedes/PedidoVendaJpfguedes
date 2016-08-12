@@ -8,7 +8,7 @@
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		
 		<properties>
-			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/pedidovenda" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/pedidovenda?useSSL=false" />
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password" value="enbkt0b-" />
 			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />

@@ -3,20 +3,27 @@
 	xmlns:h="http://java.sun.com/jsf/html"
     xmlns:f="http://java.sun.com/jsf/core"
     xmlns:ui="http://java.sun.com/jsf/facelets"
-    xmlns:p="http://primefaces.org/ui">
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:o="http://omnifaces.org/ui">
     
-    <ui:define name="titulo">Novo usuário</ui:define>
+    <ui:define name="titulo">#{cadastroUsuarioBean.editando ? 'Edição de usuário' : 'Novo usuário'}</ui:define>
 	
 	<ui:define name="corpo">
-		<h:form>
-			<h1>Novo usuário</h1>
+	
+		<f:metadata>
+			<o:viewParam name="usuario" value="#{cadastroUsuarioBean.usuario}" />
+			<f:event listener="#{cadastroUsuarioBean.inicializar}" type="preRenderView" />
+		</f:metadata>
+		
+		<h:form id="frm">
+			<h1>#{cadastroUsuarioBean.editando ? 'Edição de usuário' : 'Novo usuário'}</h1>
 			
 			<p:messages autoUpdate="true" closable="true" />
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
 					<p:button value="Novo" outcome="/usuarios/CadastroUsuario" />
-					<p:commandButton id="botaoSalvar" value="Salvar" />
+					<p:commandButton id="botaoSalvar" value="Salvar" action="#{cadastroUsuarioBean.salvar}" update="@form" />
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Pesquisa" outcome="/usuarios/PesquisaUsuarios" />
@@ -33,12 +40,11 @@
 				<p:outputLabel value="Senha" for="senha" />
 				<p:password id="senha" size="30" maxlength="20" value="#{cadastroUsuarioBean.usuario.senha}" />
 				
-				<p:selectOneMenu id="grupos" value="#{cadastroUsuarioBean.usuario.grupos}">
+				<p:selectOneMenu id="grupos" value="#{cadastroUsuarioBean.grupoSelecionado}">
 					<f:selectItem itemLabel="Selecione" />
-					<f:selectItem itemLabel="Administradores" />
-					<f:selectItem itemLabel="Usuário" />
+					<f:selectItems value="#{cadastroUsuarioBean.grupos}" var="grupo" itemValue="#{grupo}" itemLabel="#{grupo.nome}" />
 				</p:selectOneMenu>
-				<p:commandButton id="botaoAdicionarGrupo" value="Adicionar grupo" style="font-size: 10px" />
+				<p:commandButton id="botaoAdicionarGrupo" value="Adicionar grupo" action="#{cadastroUsuarioBean.adicionarGrupo}" update=":frm:tabelaGrupos" style="font-size: 10px" />
 			</p:panelGrid>
 			
 			<p:dataTable id="tabelaGrupos" value="#{cadastroUsuarioBean.usuario.grupos}" var="grupo" 
@@ -48,7 +54,8 @@
 					<h:outputText value="#{grupo.nome}" />
 				</p:column>
 				<p:column style="text-align: center; width: 50px">
-					<p:commandButton icon="ui-icon-trash" title="Excluir" update="tabelaGrupos">
+					<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{cadastroUsuarioBean.excluirGrupo}" process="@this" update="tabelaGrupos">
+						<f:setPropertyActionListener value="#{grupo}" target="#{cadastroUsuarioBean.grupoExcluirTable}" />
 						<p:confirm header="Exclusão de grupo" message="Tem certeza de que deseja excluir este grupo?" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
