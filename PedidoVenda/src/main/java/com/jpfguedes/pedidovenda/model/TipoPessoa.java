@@ -9,11 +9,29 @@ package com.jpfguedes.pedidovenda.model;
  */
 
 public enum TipoPessoa {
-	
-	FISICA, JURIDICA;
-	
-	public TipoPessoa[] getTiposPessoa() {
-		return TipoPessoa.values();
+
+	FISICA("Física"), 
+	JURIDICA("Jurídica");
+
+	private String descricao;
+
+	TipoPessoa(String descricao) {
+		this.descricao = descricao;
 	}
-	
+
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+
+	/**
+	 * @param descricao
+	 *            the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 }

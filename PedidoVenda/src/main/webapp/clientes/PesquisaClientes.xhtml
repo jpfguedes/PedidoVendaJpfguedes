@@ -8,12 +8,14 @@
     <ui:define name="titulo">Pesquisa de clientes</ui:define>
 	
 	<ui:define name="corpo">
-		<h:form>
+		<h:form id="frmPesquisaClientes">
 			<h1>Pesquisa de clientes</h1>
+			
+			<p:messages autoUpdate="true" closable="true" />
 			
 			<p:toolbar style="margin-top: 20px">
 				<p:toolbarGroup>
-					<p:commandButton id="botaoPesquisar" value="Pesquisar" />	
+					<p:commandButton id="botaoPesquisar" value="Pesquisar" action="#{pesquisaClientesBean.pesquisar}" update="@form" />	
 				</p:toolbarGroup>
 				<p:toolbarGroup align="right">
 					<p:button value="Novo" outcome="/clientes/CadastroCliente" />
@@ -22,33 +24,38 @@
 			
 			<p:panelGrid columns="2" id="painel" style="width: 100%; margin-top: 20px" columnClasses="rotulo, campo">
 				<p:outputLabel value="CPF/CNPJ" for="cpfCnpj" />
-				<p:inputText id="cpfCnpj" size="20" maxlength="20" />
+				<p:inputText id="cpfCnpj" value="#{pesquisaClientesBean.filtro.documentoReceitaFederal}" size="20" maxlength="20" />
 				
 				<p:outputLabel value="Nome" for="nome" />
-				<p:inputText id="nome" size="80" />
+				<p:inputText id="nome" value="#{pesquisaClientesBean.filtro.nome}" size="80" />
 			</p:panelGrid>
 			
 			<p:dataTable id="tabelaClientes" value="#{pesquisaClientesBean.clientesFiltrados}" var="cliente" 
 				style="margin-top: 20px" emptyMessage="Nenhum cliente encontrado." rows="20" paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom">
 				
 				<p:column headerText="Nome">
-					<h:outputText value="Supermercado João das Couves Ltda" />
+					<h:outputText value="#{cliente.nome}" />
 				</p:column>
 				<p:column headerText="Tipo" style="text-align: center; width: 100px">
-					<h:outputText value="Jurídica" />
+					<h:outputText value="#{cliente.tipo}" />
 				</p:column>
 				<p:column headerText="CPF/CNPJ" style="text-align: center; width: 200px">
-					<h:outputText value="02.493.738/0001-83" />
+					<h:outputText value="#{cliente.documentoReceitaFederal}" />
 				</p:column>
 				<p:column style="width: 100px; text-align: center">
-					<p:button icon="ui-icon-pencil" title="Editar" />
-					<p:commandButton icon="ui-icon-trash" title="Excluir" update="tabelaClientes">
+					<p:button icon="ui-icon-pencil" title="Editar" outcome="/clientes/CadastroCliente">
+						<f:param name="cliente" value="#{cliente.id}" />
+					</p:button>
+					<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{pesquisaClientesBean.excluir}" process="@this" 
+						update=":frmPesquisaClientes:tabelaClientes :frmPesquisaClientes:confirmacaoExclusaoDialog">
+						
+						<f:setPropertyActionListener value="#{cliente}" target="#{pesquisaClientesBean.clienteSelecionado}" />
 						<p:confirm header="Exclusão de cliente" message="Tem certeza que deseja excluir o cliente?" icon="ui-icon-alert" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
 			
-			<p:confirmDialog global="true" showEffect="folder" hideEffect="folder">
+			<p:confirmDialog id="confirmacaoExclusaoDialog" global="true" showEffect="folder" hideEffect="folder">
 				<p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
 				<p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
 			</p:confirmDialog>

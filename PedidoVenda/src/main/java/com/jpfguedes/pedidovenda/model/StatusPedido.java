@@ -9,11 +9,28 @@ package com.jpfguedes.pedidovenda.model;
  */
 
 public enum StatusPedido {
-	
-	ORCAMENTO, EMITIDO, CANCELADO;
-	
-	
-	public StatusPedido[] getStatusPedidos() {
-		return StatusPedido.values();
+
+	ORCAMENTO("Orçamento"), EMITIDO("Emitido"), CANCELADO("Cancelado");
+
+	private String descricao;
+
+	private StatusPedido(String descricao) {
+		this.descricao = descricao;
 	}
+
+	/**
+	 * @return the descricao
+	 */
+	public String getDescricao() {
+		return descricao;
+	}
+
+	/**
+	 * @param descricao
+	 *            the descricao to set
+	 */
+	public void setDescricao(String descricao) {
+		this.descricao = descricao;
+	}
+
 }

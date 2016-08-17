@@ -58,7 +58,8 @@ public class Endereco implements Serializable {
 	 * @return the logradouro
 	 */
 	
-	@NotBlank @Size(max = 150)
+//	@NotBlank 
+	@Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
 		return logradouro;
@@ -76,7 +77,8 @@ public class Endereco implements Serializable {
 	 * @return the numero
 	 */
 	
-	@NotBlank @Size(max = 20)
+//	@NotBlank 
+	@Size(max = 20)
 	@Column(nullable = false, length = 20)
 	public String getNumero() {
 		return numero;
@@ -112,7 +114,8 @@ public class Endereco implements Serializable {
 	 * @return the cidade
 	 */
 	
-	@NotBlank @Size(max = 60)
+//	@NotBlank 
+	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
 		return cidade;
@@ -130,7 +133,8 @@ public class Endereco implements Serializable {
 	 * @return the uf
 	 */
 	
-	@NotBlank @Size(max = 60)
+//	@NotBlank 
+	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getUf() {
 		return uf;
@@ -148,7 +152,8 @@ public class Endereco implements Serializable {
 	 * @return the cep
 	 */
 	
-	@NotBlank @Size(max = 9)
+//	@NotBlank 
+	@Size(max = 9)
 	@Column(nullable = false, length = 9)
 	public String getCep() {
 		return cep;
