@@ -31,6 +31,10 @@ public class Pedidos implements Serializable {
 	@Inject
 	private EntityManager manager;
 	
+	public Pedido guardar(Pedido pedido) {
+		return this.manager.merge(pedido);
+	}
+	
 	public Pedido porId(Long id) {
 		return manager.find(Pedido.class, id);
 	}

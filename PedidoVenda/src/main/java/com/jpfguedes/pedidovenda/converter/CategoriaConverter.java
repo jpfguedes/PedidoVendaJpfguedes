@@ -7,10 +7,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
 import com.jpfguedes.pedidovenda.model.Categoria;
 import com.jpfguedes.pedidovenda.repository.Categorias;
+import com.jpfguedes.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @author joao.guedes
@@ -20,12 +20,12 @@ import com.jpfguedes.pedidovenda.repository.Categorias;
 @FacesConverter(forClass = Categoria.class)
 public class CategoriaConverter implements Converter {
 	
-	@Inject
+	//@Inject
 	private Categorias categorias;
 	
-//	public CategoriaConverter() {
-//		categorias = CDIServiceLocator.getBean(Categorias.class);
-//	}
+	public CategoriaConverter() {
+		categorias = CDIServiceLocator.getBean(Categorias.class);
+	}
 
 	/* (non-Javadoc)
 	 * @see javax.faces.convert.Converter#getAsObject(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
@@ -35,7 +35,7 @@ public class CategoriaConverter implements Converter {
 		Categoria retorno = null;
 		
 		if(value != null && !value.isEmpty()) {
-			retorno = this.categorias.porId(Long.parseLong(value));
+			retorno = this.categorias.porId(new Long(value));
 		}
 		
 		return retorno;
@@ -47,8 +47,7 @@ public class CategoriaConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			Categoria categoria = (Categoria) value;
-			return categoria.getId() == null ? null : categoria.getId().toString();
+			return ((Categoria) value).getId().toString();
 		}
 		
 		return "";

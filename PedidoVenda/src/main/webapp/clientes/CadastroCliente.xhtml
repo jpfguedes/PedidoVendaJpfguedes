@@ -6,7 +6,7 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:o="http://omnifaces.org/ui">
     
-    <ui:define name="titulo">#{cadastroClienteBean.editando ? 'Edição de produto' : 'Novo produto'}</ui:define>
+    <ui:define name="titulo">#{cadastroClienteBean.editando ? 'Edição de cliente' : 'Novo cliente'}</ui:define>
 	
 	<ui:define name="corpo">
 		<f:metadata>
@@ -15,7 +15,7 @@
 		</f:metadata>
 	
 		<h:form id="frm">
-			<h1>#{cadastroClienteBean.editando ? 'Edição de produto' : 'Novo produto'}</h1>
+			<h1>#{cadastroClienteBean.editando ? 'Edição de cliente' : 'Novo cliente'}</h1>
 			
 			<p:messages autoUpdate="true" closable="true" />
 			

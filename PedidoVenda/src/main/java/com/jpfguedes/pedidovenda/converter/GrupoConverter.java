@@ -7,10 +7,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
 import com.jpfguedes.pedidovenda.model.Grupo;
 import com.jpfguedes.pedidovenda.repository.Grupos;
+import com.jpfguedes.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @author joao.guedes
@@ -20,16 +20,16 @@ import com.jpfguedes.pedidovenda.repository.Grupos;
 @FacesConverter(forClass = Grupo.class)
 public class GrupoConverter implements Converter {
 	
-	@Inject
+	//@Inject
 	private Grupos grupos;
 	
 	
 	/**
 	 * Ou usar este construtor ou usar o @Inject.
 	 */
-//	public ProdutoConverter() {
-//		produtos = CDIServiceLocator.getBean(Produtos.class);
-//	}
+	public GrupoConverter() {
+		grupos = CDIServiceLocator.getBean(Grupos.class);
+	}
 
 	/* (non-Javadoc)
 	 * @see javax.faces.convert.Converter#getAsObject(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
@@ -39,7 +39,7 @@ public class GrupoConverter implements Converter {
 		Grupo retorno = null;
 		
 		if(value != null && !value.isEmpty()) {
-			retorno = this.grupos.porId(Long.parseLong(value));
+			retorno = this.grupos.porId(new Long(value));
 		}
 		
 		return retorno;
@@ -51,8 +51,7 @@ public class GrupoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			Grupo grupo = (Grupo) value;
-			return grupo.getId() == null ? null : grupo.getId().toString();
+			return ((Grupo) value).getId() == null ? null : value.toString();
 		}
 		
 		return "";

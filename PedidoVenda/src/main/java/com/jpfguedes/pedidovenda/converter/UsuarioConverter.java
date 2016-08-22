@@ -7,10 +7,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
 import com.jpfguedes.pedidovenda.model.Usuario;
 import com.jpfguedes.pedidovenda.repository.Usuarios;
+import com.jpfguedes.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @author joao.guedes
@@ -20,16 +20,16 @@ import com.jpfguedes.pedidovenda.repository.Usuarios;
 @FacesConverter(forClass = Usuario.class)
 public class UsuarioConverter implements Converter {
 	
-	@Inject
+	//@Inject
 	private Usuarios usuarios;
 	
 	
 	/**
 	 * Ou usar este construtor ou usar o @Inject.
 	 */
-//	public ProdutoConverter() {
-//		produtos = CDIServiceLocator.getBean(Produtos.class);
-//	}
+	public UsuarioConverter() {
+		usuarios = CDIServiceLocator.getBean(Usuarios.class);
+	}
 
 	/* (non-Javadoc)
 	 * @see javax.faces.convert.Converter#getAsObject(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
@@ -39,7 +39,7 @@ public class UsuarioConverter implements Converter {
 		Usuario retorno = null;
 		
 		if(value != null && !value.isEmpty()) {
-			retorno = this.usuarios.porId(Long.parseLong(value));
+			retorno = this.usuarios.porId(new Long(value));
 		}
 		
 		return retorno;
@@ -51,8 +51,7 @@ public class UsuarioConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			Usuario usuario = (Usuario) value;
-			return usuario.getId() == null ? null : usuario.getId().toString();
+			return ((Usuario) value).getId().toString();
 		}
 		
 		return "";

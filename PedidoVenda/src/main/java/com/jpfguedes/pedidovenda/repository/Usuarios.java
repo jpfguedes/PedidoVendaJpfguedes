@@ -46,7 +46,6 @@ public class Usuarios implements Serializable {
 			manager.remove(usuario);
 			manager.flush();
 		} catch(PersistenceException e) {
-			e.printStackTrace();
 			throw new NegocioException("Usuário não pode ser excluído.");
 		}
 	}
@@ -64,6 +63,12 @@ public class Usuarios implements Serializable {
 		} catch (NoResultException e) {
 			return null;
 		}
+	}
+	
+	public List<Usuario> vendedores() {
+		// TODO filtrar apenas vendedores (por um grupo específico).
+		return this.manager.createQuery("from Usuario", Usuario.class)
+				.getResultList();
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -7,10 +7,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
 import com.jpfguedes.pedidovenda.model.Endereco;
 import com.jpfguedes.pedidovenda.repository.Enderecos;
+import com.jpfguedes.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @author joao.guedes
@@ -20,16 +20,16 @@ import com.jpfguedes.pedidovenda.repository.Enderecos;
 @FacesConverter(forClass = Endereco.class)
 public class EnderecoConverter implements Converter {
 	
-	@Inject
+	//@Inject
 	private Enderecos enderecos;
 	
 	
 	/**
 	 * Ou usar este construtor ou usar o @Inject.
 	 */
-//	public ProdutoConverter() {
-//		produtos = CDIServiceLocator.getBean(Produtos.class);
-//	}
+	public EnderecoConverter() {
+		enderecos = CDIServiceLocator.getBean(Enderecos.class);
+	}
 
 	/* (non-Javadoc)
 	 * @see javax.faces.convert.Converter#getAsObject(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
@@ -39,7 +39,7 @@ public class EnderecoConverter implements Converter {
 		Endereco retorno = null;
 		
 		if(value != null && !value.isEmpty()) {
-			retorno = this.enderecos.porId(Long.parseLong(value));
+			retorno = this.enderecos.porId(new Long(value));
 		}
 		
 		return retorno;
@@ -51,8 +51,7 @@ public class EnderecoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			Endereco endereco = (Endereco) value;
-			return endereco.getId() == null ? null : endereco.getId().toString();
+			return ((Endereco) value).getId().toString();
 		}
 		
 		return "";

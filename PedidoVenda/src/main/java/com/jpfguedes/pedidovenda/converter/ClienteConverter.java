@@ -7,10 +7,10 @@ import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
-import javax.inject.Inject;
 
 import com.jpfguedes.pedidovenda.model.Cliente;
 import com.jpfguedes.pedidovenda.repository.Clientes;
+import com.jpfguedes.pedidovenda.util.cdi.CDIServiceLocator;
 
 /**
  * @author joao.guedes
@@ -20,16 +20,16 @@ import com.jpfguedes.pedidovenda.repository.Clientes;
 @FacesConverter(forClass = Cliente.class)
 public class ClienteConverter implements Converter {
 	
-	@Inject
+	//@Inject
 	private Clientes clientes;
 	
 	
 	/**
 	 * Ou usar este construtor ou usar o @Inject.
 	 */
-//	public ProdutoConverter() {
-//		produtos = CDIServiceLocator.getBean(Produtos.class);
-//	}
+	public ClienteConverter() {
+		clientes = CDIServiceLocator.getBean(Clientes.class);
+	}
 
 	/* (non-Javadoc)
 	 * @see javax.faces.convert.Converter#getAsObject(javax.faces.context.FacesContext, javax.faces.component.UIComponent, java.lang.String)
@@ -39,7 +39,7 @@ public class ClienteConverter implements Converter {
 		Cliente retorno = null;
 		
 		if(value != null && !value.isEmpty()) {
-			retorno = this.clientes.porId(Long.parseLong(value));
+			retorno = this.clientes.porId(new Long(value));
 		}
 		
 		return retorno;
@@ -51,8 +51,7 @@ public class ClienteConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			Cliente cliente = (Cliente) value;
-			return cliente.getId() == null ? null : cliente.getId().toString();
+			return ((Cliente) value).getId().toString();
 		}
 		
 		return "";
