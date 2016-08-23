@@ -51,7 +51,8 @@ public class EnderecoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			return ((Endereco) value).getId().toString();
+			Endereco endereco = (Endereco) value;
+			return endereco.getId() == null ? null : endereco.getId().toString();
 		}
 		
 		return "";

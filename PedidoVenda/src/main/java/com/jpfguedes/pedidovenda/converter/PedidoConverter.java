@@ -51,7 +51,8 @@ public class PedidoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			return ((Pedido) value).getId().toString();
+			Pedido pedido = (Pedido) value;
+			return pedido.getId() == null ? null : pedido.getId().toString();
 		}
 		
 		return "";

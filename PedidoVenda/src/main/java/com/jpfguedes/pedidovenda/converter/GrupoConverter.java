@@ -8,6 +8,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.jpfguedes.pedidovenda.model.Grupo;
 import com.jpfguedes.pedidovenda.repository.Grupos;
 import com.jpfguedes.pedidovenda.util.cdi.CDIServiceLocator;
@@ -38,8 +40,8 @@ public class GrupoConverter implements Converter {
 	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		Grupo retorno = null;
 		
-		if(value != null && !value.isEmpty()) {
-			retorno = this.grupos.porId(new Long(value));
+		if(value != null && StringUtils.isNotEmpty(value)) {
+			retorno = grupos.porId(new Long(value));
 		}
 		
 		return retorno;
@@ -51,7 +53,8 @@ public class GrupoConverter implements Converter {
 	@Override
 	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if(value != null) {
-			return ((Grupo) value).getId() == null ? null : value.toString();
+			Grupo grupo = (Grupo) value;
+			return grupo.getId() == null ? null : grupo.getId().toString();
 		}
 		
 		return "";

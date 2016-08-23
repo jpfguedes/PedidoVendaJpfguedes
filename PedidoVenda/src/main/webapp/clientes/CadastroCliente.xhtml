@@ -9,6 +9,7 @@
     <ui:define name="titulo">#{cadastroClienteBean.editando ? 'Edição de cliente' : 'Novo cliente'}</ui:define>
 	
 	<ui:define name="corpo">
+	
 		<f:metadata>
 			<o:viewParam name="cliente" value="#{cadastroClienteBean.cliente}" />
 			<f:event listener="#{cadastroClienteBean.inicializar}" type="preRenderView" />
