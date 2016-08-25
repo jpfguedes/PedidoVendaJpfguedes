@@ -3,6 +3,8 @@ package com.jpfguedes.pedidovenda.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.enterprise.event.Observes;
+import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -40,8 +42,11 @@ public class CadastroPedidoBean implements Serializable {
 
 	@Inject
 	private CadastroPedidoService cadastroPedidoService;
-
+	
+	@Produces
+	@PedidoEdicao
 	private Pedido pedido;
+	
 	private Produto produtoLinhaEditavel;
 	private String sku;
 
@@ -66,6 +71,11 @@ public class CadastroPedidoBean implements Serializable {
 	private void limpar() {
 		pedido = new Pedido();
 		pedido.setEnderecoEntrega(new EnderecoEntrega());
+	}
+	
+	// Método que atualiza o pedido após o disparo do evento CDI que é um @Observes (Observa um PedidoAlteradoEvent).
+	public void pedidoAlterado(@Observes PedidoAlteradoEvent event) {
+		this.pedido = event.getPedido();
 	}
 
 	public void salvar() {

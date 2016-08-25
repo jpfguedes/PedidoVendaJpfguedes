@@ -4,7 +4,6 @@
 package com.jpfguedes.pedidovenda.service;
 
 import java.io.Serializable;
-import java.util.Date;
 
 import javax.inject.Inject;
 
@@ -18,36 +17,34 @@ import com.jpfguedes.pedidovenda.util.jpa.Transactional;
  *
  */
 
-public class CadastroPedidoService implements Serializable {
+public class CancelamentoPedidoService implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	private Pedidos pedidos;
 	
+	@Inject
+	private EstoqueService estoqueService;
+	
 	@Transactional
-	public Pedido salvar(Pedido pedido) {
-		if(pedido.isNovo()) {
-			pedido.setDataCriacao(new Date());
-			pedido.setStatus(StatusPedido.ORCAMENTO);
-		}
+	public Pedido cancelar(Pedido pedido) {
+		pedido = this.pedidos.porId(pedido.getId());
 		
-		pedido.recalcularValorTotal();
-		
-		if(pedido.isNaoAlteravel()) {
-			throw new NegocioException("Pedido não pode ser alterado no status "
+		if(pedido.isNaoCancelavel()) {
+			throw new NegocioException("Pedido não pode ser cancelado no status "
 					+ pedido.getStatus().getDescricao() + ".");
 		}
 		
-		if(pedido.getItens().isEmpty()) {
-			throw new NegocioException("O pedido deve possuir pelo menos um item.");
+		if(pedido.isEmitido()) {
+			this.estoqueService.retornarItensEstoque(pedido);
 		}
 		
-		if(pedido.isValorTotalNegativo()) {
-			throw new NegocioException("Valor total do pedido não pode ser negativo.");
-		}
+		pedido.setStatus(StatusPedido.CANCELADO);
 		
 		pedido = this.pedidos.guardar(pedido);
+		
 		return pedido;
 	}
+
 }

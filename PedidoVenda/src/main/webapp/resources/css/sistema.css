@@ -120,3 +120,7 @@ h1 {
 }
 /* Menu sistema fim */
 
+.ui-state-disable {
+	opacity: .80 !important;
+}
+
