@@ -133,7 +133,7 @@ public class Cliente implements Serializable {
 	 * @return the enderecos
 	 */
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
 	public List<Endereco> getEnderecos() {
 		return enderecos;
 	}

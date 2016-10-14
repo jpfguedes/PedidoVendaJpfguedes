@@ -1,8 +1,6 @@
 package com.jpfguedes.pedidovenda.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -22,8 +20,6 @@ public class CadastroClienteBean implements Serializable {
 
 	private Cliente cliente;
 	private Endereco endereco;
-
-	private List<Endereco> enderecos;
 
 	@Inject
 	private CadastroClienteService cadastroClienteService;
@@ -50,7 +46,18 @@ public class CadastroClienteBean implements Serializable {
 	public void limpar() {
 		cliente = new Cliente();
 		endereco = new Endereco();
-		enderecos = new ArrayList<>();
+	}
+	
+	public void incluirEndereco() {
+		if(endereco != null) {
+			endereco.setCliente(this.cliente);
+			this.cliente.getEnderecos().add(endereco);
+			FacesUtil.addInfoMessage("Endereço adicionado com sucesso!");
+		}
+	}
+	
+	public void removerEndereco() {
+		this.cliente.getEnderecos().remove(endereco);
 	}
 
 	public TipoPessoa[] getTiposPessoa() {
@@ -75,18 +82,6 @@ public class CadastroClienteBean implements Serializable {
 	 */
 	public void setEndereco(Endereco endereco) {
 		this.endereco = endereco;
-	}
-
-	/**
-	 * @param enderecos
-	 *            the enderecos to set
-	 */
-	public void setEnderecos(List<Endereco> enderecos) {
-		this.enderecos = enderecos;
-	}
-
-	public List<Endereco> getEnderecos() {
-		return enderecos;
 	}
 
 	/**

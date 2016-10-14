@@ -15,8 +15,6 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotBlank;
-
 /**
  * @author joao.guedes
  *
@@ -57,8 +55,7 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the logradouro
 	 */
-	
-//	@NotBlank 
+	 
 	@Size(max = 150)
 	@Column(nullable = false, length = 150)
 	public String getLogradouro() {
@@ -76,8 +73,7 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the numero
 	 */
-	
-//	@NotBlank 
+	 
 	@Size(max = 20)
 	@Column(nullable = false, length = 20)
 	public String getNumero() {
@@ -113,8 +109,7 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the cidade
 	 */
-	
-//	@NotBlank 
+	 
 	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getCidade() {
@@ -132,8 +127,7 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the uf
 	 */
-	
-//	@NotBlank 
+	 
 	@Size(max = 60)
 	@Column(nullable = false, length = 60)
 	public String getUf() {
@@ -151,8 +145,7 @@ public class Endereco implements Serializable {
 	/**
 	 * @return the cep
 	 */
-	
-//	@NotBlank 
+	 
 	@Size(max = 9)
 	@Column(nullable = false, length = 9)
 	public String getCep() {
