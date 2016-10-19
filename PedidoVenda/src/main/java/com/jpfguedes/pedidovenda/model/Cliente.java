@@ -145,6 +145,16 @@ public class Cliente implements Serializable {
 	public void setEnderecos(List<Endereco> enderecos) {
 		this.enderecos = enderecos;
 	}
+	
+//	@Transient
+//	public boolean isNaoEnviavelPorEmail() {
+//		return getId() >= 0L;
+//	}
+//	
+//	@Transient
+//	public boolean isEnviavelPorEmail() {
+//		return !this.isNaoEnviavelPorEmail();
+//	}
 
 	/*
 	 * (non-Javadoc)

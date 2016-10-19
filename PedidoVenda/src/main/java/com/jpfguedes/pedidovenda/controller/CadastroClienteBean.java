@@ -2,6 +2,7 @@ package com.jpfguedes.pedidovenda.controller;
 
 import java.io.Serializable;
 
+import javax.enterprise.inject.Produces;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -17,7 +18,9 @@ import com.jpfguedes.pedidovenda.util.jsf.FacesUtil;
 public class CadastroClienteBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
+	@Produces
+	@ClienteEdicao
 	private Cliente cliente;
 	private Endereco endereco;
 
